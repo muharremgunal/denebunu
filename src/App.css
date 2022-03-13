@@ -83,6 +83,11 @@
 }
 .category-content {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 5px 0px 15px 0px;
 }
 
 .available-logo {
@@ -108,6 +113,13 @@
   width: 40px;
   height: 40px;
   margin-right: 10px;
+}
+.select-products {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
 }
 
 .review-header {
@@ -174,7 +186,7 @@
   color: white;
 }
 
-.coloredClassCategory {
+.coloredRemoved {
   background-color: #0d3f94;
   color: white;
 }

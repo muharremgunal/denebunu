@@ -1,5 +1,6 @@
 import React from "react";
 import { FiCodesandbox } from "react-icons/fi";
+import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addProduct,
@@ -34,31 +35,43 @@ const Category = () => {
         const coloredClass =
           selectedRemoveProductsLength > 0 ? "coloredRemove" : "";
 
+        const coloredClassCategory =
+          category_content.length > 1 ? "coloredRemoved" : "";
+
         return (
           <div className="category">
             <React.Fragment key={category.name}>
               <label className="category-name">
                 <FiCodesandbox className="category-logo" /> {category.name}
               </label>
-              <div className="category-content">
-                {category.category_products.map((product) => (
-                  <div
-                    className="form-check form-check-inline"
-                    key={product.name}
-                  >
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      checked={product.isChecked}
-                      onChange={() =>
-                        onCategoryProductChange(product.id, category.id)
-                      }
-                      key={product.id}
-                    />
-                    <label key={product.name}>{product.name}</label>
-                  </div>
-                ))}
-              </div>
+              {category.category_products.length < 1 ? (
+                <div className="select-products">
+                  <span>
+                    <AiOutlineHeart />
+                  </span>
+                  <h5>Select products to add here</h5>
+                </div>
+              ) : (
+                <div className="category-content">
+                  {category.category_products.map((product) => (
+                    <div
+                      className="form-check form-check-inline"
+                      key={product.name}
+                    >
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        checked={product.isChecked}
+                        onChange={() =>
+                          onCategoryProductChange(product.id, category.id)
+                        }
+                        key={product.id}
+                      />
+                      <label key={product.name}>{product.name}</label>
+                    </div>
+                  ))}
+                </div>
+              )}
               <div className="add-buttons">
                 <div className="add-products-button">
                   <button
@@ -79,7 +92,7 @@ const Category = () => {
                   </button>
                 </div>
                 <button
-                  className="remove-category-buttons "
+                  className={`remove-category-buttons ${coloredClassCategory} `}
                   onClick={() => {
                     if (category_content.length > 1) {
                       dispatch(removeCategory(category.id));
